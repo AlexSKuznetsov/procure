@@ -1,3 +1,4 @@
+import { Lot as LotType } from '@prisma/client';
 import {
   Card,
   CardContent,
@@ -7,39 +8,31 @@ import {
   CardTitle,
 } from './ui/card';
 
-type PropsType = {
-  id: number;
-  name: string;
-  description: string;
-  duration: string;
-  isFinished: boolean;
-};
-
 export const Lot = ({
   id,
   description,
   name,
   duration,
   isFinished,
-}: PropsType) => {
+}: LotType) => {
   return (
-    <Card className='shadow w-[400px] m-2 bg-white'>
+    <Card className="m-2 w-[400px] bg-white shadow">
       <CardHeader>
-        <CardTitle className='flex justify-between items-center'>
+        <CardTitle className="flex items-center justify-between">
           Lot: {id}
           <span>
             {isFinished ? (
-              <span className='uppercase bg-violet-400 p-1 px-2 rounded text-sm text-white shadow'>
+              <span className="rounded bg-violet-400 p-1 px-2 text-sm uppercase text-white shadow">
                 finished
               </span>
             ) : (
-              <span className='uppercase bg-green-300 p-1 px-2 rounded text-slate-800 text-sm shadow'>
+              <span className="rounded bg-green-300 p-1 px-2 text-sm uppercase text-slate-800 shadow">
                 in progress
               </span>
             )}
           </span>
         </CardTitle>
-        <CardDescription className='text-slate-500'>
+        <CardDescription className="text-slate-500">
           {description}
         </CardDescription>
       </CardHeader>
