@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import { Lot } from '@/components/Lot';
 import { CreateLot } from '@/components/CreateModal';
+import { LotList } from '@/components/LotList';
 
 const Byuer = async () => {
   const lots = await prisma.lot.findMany();
@@ -12,7 +13,8 @@ const Byuer = async () => {
       <div className="mt-4 flex flex-col items-center space-y-2">
         <CreateLot />
         <h2>Lots list:</h2>
-        {lots && lots.map((el) => <Lot key={el.id} {...el} />)}
+
+        <LotList lots={lots} />
       </div>
     </div>
   );
