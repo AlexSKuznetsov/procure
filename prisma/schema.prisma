@@ -15,5 +15,6 @@ model Lot {
   name String
   description String
   duration String
+  lotId String
   isFinished Boolean
 }

@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm-run-all -l build:temporal --parallel dev:temporal dev:next start:worker",
+    "dev": "npm-run-all -l build:temporal --parallel dev:temporal dev:next",
     "dev:next": "next dev",
-    "dev:temporal": "tsc --build --watch ./temporal/tsconfig.json",
+    "dev:temporal": "tsc-watch --noClear -p ./temporal/tsconfig.json --onSuccess \"node ./temporal/lib/worker\"",
     "build": "npm-run-all -l --parallel build:next build:temporal",
     "build:next": "next build",
-    "build:temporal": "tsc --build ./temporal/tsconfig.json",
+    "build:temporal": "run-s rimraf rebuild",
     "start": "npm run dev",
     "start:worker": "node ./temporal/lib/worker",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "rebuild": "tsc --build --force ./temporal/tsconfig.json",
+    "rimraf": "rimraf ./temporal/lib"
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
@@ -45,7 +47,8 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.6",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.4",
@@ -53,6 +56,8 @@
     "nodemon": "^3.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.4.1"
+    "prettier-plugin-tailwindcss": "^0.4.1",
+    "rimraf": "^5.0.1",
+    "tsc-watch": "^6.0.4"
   }
 }

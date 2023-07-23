@@ -3,6 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { handleSubmit } from '../lib/actions';
 import { FormEvent } from 'react';
 import { LotType } from '../types/lot';
+import { revalidate } from '../lib/actions';
 
 export const CreateForm = ({ handleClose }: { handleClose: () => void }) => {
   const handle = async (e: FormEvent<HTMLFormElement>) => {
@@ -19,7 +20,15 @@ export const CreateForm = ({ handleClose }: { handleClose: () => void }) => {
   };
 
   return (
-    <form onSubmit={handle}>
+    <form
+      onSubmit={async (e) => {
+        handle(e);
+
+        ('use server');
+        // it tooks some time to save lot to db from workflow
+        setTimeout(async () => revalidate('/buyer'), 3000);
+      }}
+    >
       <LotFields />
       <div className="mt-8 space-x-6 text-right">
         <Dialog.Close className="rounded  px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600">
