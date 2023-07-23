@@ -26,7 +26,6 @@ export const saveLotToDb = async (lot: {
         duration,
         name,
         lotId,
-        isFinished: false,
       },
     });
 

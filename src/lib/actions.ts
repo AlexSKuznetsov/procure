@@ -15,12 +15,11 @@ export const handleSubmit = async (formData: LotType) => {
 
   try {
     const result = await client.workflow.start(startProcureProcess, {
-      workflowId: 'Lot id' + ' ' + uuidv4(),
+      workflowId: lotId,
       args: [{ name, description, duration, lotId }],
       taskQueue: 'start-procur',
     });
 
-    // setTimeout(() => revalidatePath('/buyer'), 2000);
     return result.workflowId;
   } catch (e) {
     return new Error('Failed to start procure workflow');

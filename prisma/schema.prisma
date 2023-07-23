@@ -16,5 +16,6 @@ model Lot {
   description String
   duration String
   lotId String
-  isFinished Boolean
+  isFinished Boolean @default(false)
+  createdAt DateTime @default(now())
 }

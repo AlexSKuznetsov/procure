@@ -3,9 +3,7 @@ import { CreateLot } from '@/components/CreateModal';
 import { LotList } from '@/components/LotList';
 
 const Byuer = async () => {
-  const lots = await prisma.lot.findMany({
-    orderBy: { id: 'desc' },
-  });
+  const lots = await prisma.lot.findMany({ orderBy: { id: 'desc' } });
 
   return (
     <div className="h-[screen-20px]">

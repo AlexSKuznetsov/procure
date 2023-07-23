@@ -1,9 +1,8 @@
+import { FormEvent } from 'react';
 import * as Label from '@radix-ui/react-label';
 import * as Dialog from '@radix-ui/react-dialog';
-import { handleSubmit } from '../lib/actions';
-import { FormEvent } from 'react';
+import { handleSubmit, revalidate } from '../lib/actions';
 import { LotType } from '../types/lot';
-import { revalidate } from '../lib/actions';
 
 export const CreateForm = ({ handleClose }: { handleClose: () => void }) => {
   const handle = async (e: FormEvent<HTMLFormElement>) => {
