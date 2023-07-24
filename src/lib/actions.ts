@@ -1,10 +1,9 @@
 'use server';
 
 import { LotType } from '@/types/lot';
-import { revalidatePath, revalidateTag } from 'next/cache';
-import { prisma } from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 import { Client, Connection } from '@temporalio/client';
-import { startProcureProcess } from '../../temporal/src/workflow';
+import { startProcureProcess, cancelLotSignal } from '../../temporal/src/workflow';
 import { v4 as uuidv4 } from 'uuid';
 
 export const handleSubmit = async (formData: LotType) => {
@@ -29,3 +28,15 @@ export const handleSubmit = async (formData: LotType) => {
 export async function revalidate(path: string) {
   revalidatePath(path);
 }
+
+export const handleCancel = async (lotId: string) => {
+  const connection = await Connection.connect({});
+  const client = new Client({ connection });
+  const handle = client.workflow.getHandle(lotId);
+
+  try {
+    await handle.signal(cancelLotSignal);
+  } catch (e) {
+    console.log('Faild to send a cancel signal', e);
+  }
+};

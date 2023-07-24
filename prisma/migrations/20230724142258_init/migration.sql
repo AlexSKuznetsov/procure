@@ -5,5 +5,6 @@ CREATE TABLE "Lot" (
     "description" TEXT NOT NULL,
     "duration" TEXT NOT NULL,
     "lotId" TEXT NOT NULL,
-    "isFinished" BOOLEAN NOT NULL
+    "status" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

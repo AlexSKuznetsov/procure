@@ -25,15 +25,15 @@ export const CreateForm = ({ handleClose }: { handleClose: () => void }) => {
 
         ('use server');
         // it tooks some time to save lot to db from workflow
-        setTimeout(async () => revalidate('/buyer'), 3000);
+        setTimeout(async () => revalidate('/buyer'), 2000);
       }}
     >
       <LotFields />
-      <div className="mt-8 space-x-6 text-right">
-        <Dialog.Close className="rounded  px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600">
+      <div className='mt-8 space-x-6 text-right'>
+        <Dialog.Close className='rounded  px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600'>
           Cancel
         </Dialog.Close>
-        <button className="rounded bg-green-500 px-4 py-2 text-sm font-medium text-white shadow hover:bg-green-600">
+        <button className='rounded bg-green-500 px-4 py-2 text-sm font-medium text-white shadow hover:bg-green-600'>
           Save
         </button>
       </div>
@@ -43,52 +43,52 @@ export const CreateForm = ({ handleClose }: { handleClose: () => void }) => {
 
 const LotFields = () => {
   return (
-    <div className="mt-4 space-y-4">
+    <div className='mt-4 space-y-4'>
       <div>
         <Label.Root
-          className="whitespace-nowrap text-sm font-medium text-gray-800"
-          htmlFor="name"
+          className='whitespace-nowrap text-sm font-medium text-gray-800'
+          htmlFor='name'
         >
           Name
         </Label.Root>
         <input
           autoFocus
-          className="w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm"
-          type="text"
-          placeholder="Lot name"
-          id="name"
-          name="name"
+          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
+          type='text'
+          placeholder='Lot name'
+          id='name'
+          name='name'
         />
       </div>
 
       <div>
         <Label.Root
-          className="whitespace-nowrap text-sm font-medium text-gray-800"
-          htmlFor="description"
+          className='whitespace-nowrap text-sm font-medium text-gray-800'
+          htmlFor='description'
         >
           Description
         </Label.Root>
         <textarea
-          className="w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm"
-          placeholder="Lot description"
-          id="description"
-          name="description"
+          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
+          placeholder='Lot description'
+          id='description'
+          name='description'
         />
       </div>
 
       <div>
         <Label.Root
-          className="col-span-1 whitespace-nowrap text-sm font-medium text-gray-800"
-          htmlFor="duration"
+          className='col-span-1 whitespace-nowrap text-sm font-medium text-gray-800'
+          htmlFor='duration'
         >
           Duration
         </Label.Root>
         <input
-          className="w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm"
-          type="text"
-          placeholder="30 days; 1 day; 1 hour"
-          id="duration"
-          name="duration"
+          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
+          type='text'
+          placeholder='30 days; 1 day; 1 hour'
+          id='duration'
+          name='duration'
         />
       </div>
     </div>

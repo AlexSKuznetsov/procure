@@ -26,6 +26,7 @@ export const saveLotToDb = async (lot: {
         duration,
         name,
         lotId,
+        status: 'in progress',
       },
     });
 
@@ -39,14 +40,14 @@ export const saveLotToDb = async (lot: {
   }
 };
 
-export const changeStatus = async (lotId: string) => {
+export const changeStatus = async (lotId: string, status: string) => {
   const client = new PrismaClient();
   try {
     const lot = await client.lot.findFirst({ where: { lotId } });
 
     await client.lot.update({
       where: { id: lot?.id },
-      data: { isFinished: true },
+      data: { status },
     });
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
