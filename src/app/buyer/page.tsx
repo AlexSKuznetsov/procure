@@ -7,7 +7,7 @@ const Byuer = async () => {
 
   return (
     <div className='h-[screen-20px]'>
-      <h1 className='mt-2 text-center text-xl text-white'>Buyer page</h1>
+      <h1 className='mt-2 text-center text-xl font-bold text-white'>Buyer page</h1>
 
       <div className='mt-4 flex flex-col items-center space-y-2'>
         <div className='flex w-[420px] items-end justify-between '>

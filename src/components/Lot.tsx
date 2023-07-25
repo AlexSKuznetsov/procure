@@ -38,14 +38,19 @@ export const Lot = ({ id, description, name, duration, status, lotId }: LotType)
       </CardContent>
       <CardFooter>
         <div className='flex w-full flex-col space-y-2 text-gray-500'>
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center space-x-2'>
+            <TimerIcon />
+            <p className='text-sm'>{duration}</p>
+          </div>
+
+          <div className='group flex items-center justify-between'>
             <div className='flex items-center space-x-2'>
-              <TimerIcon />
-              <p className='text-sm'>{duration}</p>
+              <InfoCircledIcon />
+              <p className='text-xs'>{lotId}</p>
             </div>
             {isInProgress && !isLoading && (
               <div
-                className='flex cursor-pointer items-center space-x-1 rounded border border-red-500 p-1'
+                className='flex cursor-pointer items-center space-x-1 rounded border border-gray-500 p-1 group-hover:border-red-500'
                 onClick={async () => {
                   setIsLoading(true);
                   await handleCancel(lotId);
@@ -55,14 +60,10 @@ export const Lot = ({ id, description, name, duration, status, lotId }: LotType)
                   }, 2000);
                 }}
               >
-                <CrossCircledIcon color='red' />
-                <span className='text-xs hover:text-gray-800'>cancel</span>
+                <CrossCircledIcon className='text-gray-500 group-hover:text-red-600' />
+                <span className='text-xs group-hover:text-red-500'>cancel</span>
               </div>
             )}
-          </div>
-          <div className='flex items-center space-x-2'>
-            <InfoCircledIcon />
-            <p className='text-xs'>{lotId}</p>
           </div>
         </div>
       </CardFooter>

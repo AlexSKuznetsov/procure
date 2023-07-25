@@ -1,7 +1,7 @@
 const Seller = () => {
   return (
-    <div className="h-[screen-20px]">
-      <h1>Seller</h1>
+    <div className='mt-2 h-[calc(100vh-50px)] text-center text-xl font-bold text-white'>
+      <h1>Seller page</h1>
     </div>
   );
 };

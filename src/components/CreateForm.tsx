@@ -1,17 +1,21 @@
-import { FormEvent } from 'react';
+import { Dispatch, FormEvent, SetStateAction } from 'react';
 import * as Label from '@radix-ui/react-label';
 import * as Dialog from '@radix-ui/react-dialog';
 import { handleSubmit, revalidate } from '../lib/actions';
 import { LotType } from '../types/lot';
 
-export const CreateForm = ({ handleClose }: { handleClose: () => void }) => {
+type PropsType = {
+  handleClose: () => void;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+};
+
+export const CreateForm = ({ handleClose, setIsLoading }: PropsType) => {
   const handle = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setIsLoading(true);
     const form = e.target as HTMLFormElement;
-    const formData = new FormData(form) as unknown as Iterable<
-      [LotType, FormDataEntryValue]
-    >;
+    const formData = new FormData(form) as unknown as Iterable<[LotType, FormDataEntryValue]>;
     const requestData: LotType = Object.fromEntries(formData);
 
     await handleSubmit(requestData);
@@ -25,7 +29,10 @@ export const CreateForm = ({ handleClose }: { handleClose: () => void }) => {
 
         ('use server');
         // it tooks some time to save lot to db from workflow
-        setTimeout(async () => revalidate('/buyer'), 2000);
+        setTimeout(async () => {
+          setIsLoading(false);
+          revalidate('/buyer');
+        }, 2000);
       }}
     >
       <LotFields />
@@ -45,10 +52,7 @@ const LotFields = () => {
   return (
     <div className='mt-4 space-y-4'>
       <div>
-        <Label.Root
-          className='whitespace-nowrap text-sm font-medium text-gray-800'
-          htmlFor='name'
-        >
+        <Label.Root className='whitespace-nowrap text-sm font-medium text-gray-800' htmlFor='name'>
           Name
         </Label.Root>
         <input

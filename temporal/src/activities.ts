@@ -20,6 +20,7 @@ export const saveLotToDb = async (lot: {
   const client = new PrismaClient();
   const { description, duration, name, lotId } = lot;
   try {
+    const company = await client.company.findFirst();
     const result = await client.lot.create({
       data: {
         description,
@@ -27,6 +28,11 @@ export const saveLotToDb = async (lot: {
         name,
         lotId,
         status: 'in progress',
+        company: {
+          connect: {
+            id: company?.id,
+          },
+        },
       },
     });
 
