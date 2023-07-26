@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const handleSubmit = async (formData: LotType) => {
   const { description, duration, name } = formData;
+
   const connection = await Connection.connect({});
   const client = new Client({ connection });
   const lotId = uuidv4();

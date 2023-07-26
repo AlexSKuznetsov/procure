@@ -5,15 +5,21 @@ import * as Select from '@radix-ui/react-select';
 import classnames from 'classnames';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { Company } from 'prisma/prisma-client';
+import { useCompanyStore } from '../store/store';
 
 export const CompanySelect = ({ companies }: { companies: Company[] }) => {
+  const { companyName, setCompanyName, setCompanyId } = useCompanyStore();
+
+  const onChange = (value: string) => {
+    const id = companies.find((c) => c.name === value)?.id;
+    setCompanyName(value);
+    setCompanyId(id);
+  };
+
   return (
-    <Select.Root>
-      <Select.Trigger
-        className='inline-flex h-[35px] items-center justify-center gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none text-violet-500 shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-violet-100 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-violet-600'
-        aria-label='company'
-      >
-        <Select.Value placeholder='Select a company' />
+    <Select.Root onValueChange={onChange} value={companyName}>
+      <Select.Trigger className='inline-flex h-[35px] items-center justify-center gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none text-violet-500 shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-violet-100 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-violet-600'>
+        <Select.Value placeholder='Select a company'>{companyName}</Select.Value>
         <Select.Icon className='text-violet-500'>
           <ChevronDownIcon />
         </Select.Icon>
@@ -34,7 +40,7 @@ export const CompanySelect = ({ companies }: { companies: Company[] }) => {
               </Select.Label>
               {companies.map(({ name, id }) => (
                 <Select.Item
-                  value={id}
+                  value={name}
                   key={id}
                   className='relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none text-gray-700 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet-300 data-[disabled]:text-gray-600 data-[highlighted]:text-gray-700 data-[highlighted]:outline-none'
                 >

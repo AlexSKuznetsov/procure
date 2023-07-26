@@ -1,14 +1,17 @@
 'use client';
 
-import * as Dialog from '@radix-ui/react-dialog';
 import { useState } from 'react';
-import { Spinner } from './Spinner';
+import * as Dialog from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
+import { Spinner } from './Spinner';
 import { CreateForm } from './CreateForm';
+import { useCompanyStore } from '@/store/store';
 
 export const CreateLot = () => {
   const [open, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { companyId } = useCompanyStore();
 
   const handleClose = () => setIsOpen(false);
 
@@ -28,7 +31,11 @@ export const CreateLot = () => {
               </Dialog.Close>
             </div>
 
-            <CreateForm handleClose={handleClose} setIsLoading={setIsLoading} />
+            <CreateForm
+              handleClose={handleClose}
+              setIsLoading={setIsLoading}
+              companyId={companyId}
+            />
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Portal>

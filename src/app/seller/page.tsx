@@ -1,7 +1,9 @@
+import { PageHeader } from '@/components/PageHeader';
+
 const Seller = () => {
   return (
-    <div className='mt-2 h-[calc(100vh-50px)] text-center text-xl font-bold text-white'>
-      <h1>Seller page</h1>
+    <div className='mt-2 h-[calc(100vh-50px)]'>
+      <PageHeader text='Seller page' />
     </div>
   );
 };

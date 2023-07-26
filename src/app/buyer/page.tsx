@@ -1,13 +1,14 @@
 import { prisma } from '@/lib/prisma';
 import { CreateLot } from '@/components/CreateModal';
 import { LotList } from '@/components/LotList';
+import { PageHeader } from '@/components/PageHeader';
 
 const Byuer = async () => {
   const lots = await prisma.lot.findMany({ orderBy: { id: 'desc' } });
 
   return (
-    <div className='h-[screen-20px]'>
-      <h1 className='mt-2 text-center text-xl font-bold text-white'>Buyer page</h1>
+    <div className='mt-2 h-[calc(100vh-50px)]'>
+      <PageHeader text='Buyer page' />
 
       <div className='mt-4 flex flex-col items-center space-y-2'>
         <div className='flex w-[420px] items-end justify-between '>

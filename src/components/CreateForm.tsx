@@ -7,9 +7,10 @@ import { LotType } from '../types/lot';
 type PropsType = {
   handleClose: () => void;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  companyId: string | undefined;
 };
 
-export const CreateForm = ({ handleClose, setIsLoading }: PropsType) => {
+export const CreateForm = ({ handleClose, setIsLoading, companyId }: PropsType) => {
   const handle = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
