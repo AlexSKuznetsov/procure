@@ -6,7 +6,7 @@ import { Client, Connection } from '@temporalio/client';
 import { startProcureProcess, cancelLotSignal } from '../../temporal/src/workflow';
 import { v4 as uuidv4 } from 'uuid';
 
-export const handleSubmit = async (formData: LotType) => {
+export const handleSubmit = async (formData: LotType, companyId: string) => {
   const { description, duration, name } = formData;
 
   const connection = await Connection.connect({});
@@ -16,7 +16,7 @@ export const handleSubmit = async (formData: LotType) => {
   try {
     const result = await client.workflow.start(startProcureProcess, {
       workflowId: lotId,
-      args: [{ name, description, duration, lotId }],
+      args: [{ name, description, duration, lotId, companyId }],
       taskQueue: 'start-procur',
     });
 

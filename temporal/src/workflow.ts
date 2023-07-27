@@ -23,6 +23,7 @@ export async function startProcureProcess(lot: {
   description: string;
   duration: Duration;
   lotId: string;
+  companyId: string;
 }): Promise<string> {
   const { lotId } = lot;
 

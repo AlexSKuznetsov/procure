@@ -19,7 +19,7 @@ export const CreateForm = ({ handleClose, setIsLoading, companyId }: PropsType) 
     const formData = new FormData(form) as unknown as Iterable<[LotType, FormDataEntryValue]>;
     const requestData: LotType = Object.fromEntries(formData);
 
-    await handleSubmit(requestData);
+    await handleSubmit(requestData, companyId as string);
     handleClose();
   };
 
@@ -33,7 +33,7 @@ export const CreateForm = ({ handleClose, setIsLoading, companyId }: PropsType) 
         setTimeout(async () => {
           setIsLoading(false);
           revalidate('/buyer');
-        }, 2000);
+        }, 3000);
       }}
     >
       <LotFields />
