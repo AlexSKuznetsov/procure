@@ -1,3 +1,9 @@
-import { Lot } from 'prisma/prisma-client';
+import { Prisma } from 'prisma/prisma-client';
 
-export type LotType = Pick<Lot, 'description' | 'duration' | 'name'>;
+// https://github.com/prisma/prisma/discussions/10928
+export type LotType = Prisma.LotGetPayload<{
+  include: {
+    company: true;
+    offers: true;
+  };
+}>;

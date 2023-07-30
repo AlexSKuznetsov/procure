@@ -3,7 +3,12 @@
 import { LotType } from '@/types/lot';
 import { revalidatePath } from 'next/cache';
 import { Client, Connection } from '@temporalio/client';
-import { startProcureProcess, cancelLotSignal } from '../../temporal/src/workflow';
+import {
+  startProcureProcess,
+  cancelLotSignal,
+  handleBid,
+  BidPayload,
+} from '../../temporal/src/workflow';
 import { v4 as uuidv4 } from 'uuid';
 
 export const handleSubmit = async (formData: LotType, companyId: string) => {
@@ -39,5 +44,17 @@ export const handleCancel = async (lotId: string) => {
     await handle.signal(cancelLotSignal);
   } catch (e) {
     console.log('Faild to send a cancel signal', e);
+  }
+};
+
+export const handleAddBid = async (lotId: string, payload: BidPayload) => {
+  const connection = await Connection.connect({});
+  const client = new Client({ connection });
+  const handle = client.workflow.getHandle(lotId);
+
+  try {
+    await handle.signal(handleBid, payload);
+  } catch (e) {
+    console.log('Failed to handle bid signal', e);
   }
 };

@@ -1,39 +1,42 @@
 import { Dispatch, FormEvent, SetStateAction } from 'react';
+
 import * as Label from '@radix-ui/react-label';
 import * as Dialog from '@radix-ui/react-dialog';
-import { handleSubmit } from '../lib/actions';
-import { LotType } from '../types/lot';
+import { Company } from '@prisma/client';
+import { handleAddBid } from '@/lib/actions';
 
 type PropsType = {
-  handleClose: () => void;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-  companyId: string | undefined;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  sellerId: string;
+  lotId: string;
+  lotNumber: number;
 };
 
-export const CreateForm = ({ handleClose, setIsLoading, companyId }: PropsType) => {
-  const handle = async (e: FormEvent<HTMLFormElement>) => {
+export const BidForm = ({ setIsOpen, sellerId, lotId, lotNumber }: PropsType) => {
+  const handleCreateBid = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsLoading(true);
     const form = e.target as HTMLFormElement;
-    const formData = new FormData(form) as unknown as Iterable<[LotType, FormDataEntryValue]>;
-    const requestData: LotType = Object.fromEntries(formData);
+    const formData = new FormData(form) as unknown as Iterable<[any, FormDataEntryValue]>;
+    const requestData: any = Object.fromEntries(formData);
 
-    await handleSubmit(requestData, companyId as string);
-    handleClose();
+    console.log(requestData);
+
+    await handleAddBid(lotId, {
+      companyId: sellerId,
+      condition: requestData.condition,
+      description: requestData.description,
+      lotId: lotNumber,
+      price: requestData.price,
+      sellerId: sellerId,
+    });
+
+    setIsOpen(false);
   };
 
   return (
-    <form
-      onSubmit={async (e) => {
-        handle(e);
-
-        setTimeout(async () => {
-          setIsLoading(false);
-        }, 3000);
-      }}
-    >
-      <LotFields />
+    <form onSubmit={handleCreateBid}>
+      <BidFields />
       <div className='mt-8 space-x-6 text-right'>
         <Dialog.Close className='rounded  px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600'>
           Cancel
@@ -46,20 +49,21 @@ export const CreateForm = ({ handleClose, setIsLoading, companyId }: PropsType) 
   );
 };
 
-const LotFields = () => {
+const BidFields = () => {
   return (
     <div className='mt-4 space-y-4'>
       <div>
-        <Label.Root className='whitespace-nowrap text-sm font-medium text-gray-800' htmlFor='name'>
-          Name
+        <Label.Root className='whitespace-nowrap text-sm font-medium text-gray-800' htmlFor='price'>
+          Price
         </Label.Root>
         <input
           autoFocus
           className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
-          type='text'
-          placeholder='Lot name'
-          id='name'
-          name='name'
+          type='number'
+          step='.01'
+          placeholder='Price'
+          id='price'
+          name='price'
         />
       </div>
 
@@ -72,7 +76,7 @@ const LotFields = () => {
         </Label.Root>
         <textarea
           className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
-          placeholder='Lot description'
+          placeholder='Bid description'
           id='description'
           name='description'
         />
@@ -81,16 +85,16 @@ const LotFields = () => {
       <div>
         <Label.Root
           className='col-span-1 whitespace-nowrap text-sm font-medium text-gray-800'
-          htmlFor='duration'
+          htmlFor='Condition'
         >
-          Duration
+          Condition
         </Label.Root>
         <input
           className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
           type='text'
-          placeholder='30 days; 1 day; 1 hour'
-          id='duration'
-          name='duration'
+          placeholder='5 days, 1 month, 6 months'
+          id='condition'
+          name='condition'
         />
       </div>
     </div>

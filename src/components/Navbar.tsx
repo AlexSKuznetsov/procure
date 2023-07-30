@@ -20,7 +20,7 @@ export const NavBar = () => {
           <NavigationMenu.Item key={el.text}>
             <NavigationMenu.Link asChild active={pathname === el.link}>
               <NextLink
-                className='text-violet-600 hover:text-slate-500 data-[active]:text-violet-500 data-[active]:underline'
+                className='text-gray-700 hover:text-slate-500 data-[active]:text-blue-700 data-[active]:underline'
                 href={el.link}
               >
                 {el.text}

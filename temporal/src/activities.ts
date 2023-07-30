@@ -1,5 +1,6 @@
 import { Duration } from '@temporalio/common/lib/time';
 import { PrismaClient, Prisma } from 'prisma/prisma-client';
+import { BidPayload } from './workflow';
 
 export async function notify(lot: {
   name: string;
@@ -60,6 +61,29 @@ export const changeStatus = async (lotId: string, status: string) => {
       throw new Error(e.message);
     } else {
       throw new Error('Error while changing lot status in DB');
+    }
+  }
+};
+
+export const addBidd = async (payload: BidPayload) => {
+  const { companyId, condition, description, lotId, price, sellerId } = payload;
+  const client = new PrismaClient();
+
+  try {
+    await client.offer.create({
+      data: {
+        condition,
+        description,
+        price,
+        lotNumber: lotId,
+        companyId: companyId,
+      },
+    });
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      throw new Error(e.message);
+    } else {
+      throw new Error('Error while adding offer for lot');
     }
   }
 };

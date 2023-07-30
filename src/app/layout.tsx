@@ -10,14 +10,10 @@ export const metadata: Metadata = {
   description: '#',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={(inter.className, 'bg-slate-800')}>
+    <html lang='en'>
+      <body className={(inter.className, 'bg-slate-900')}>
         <NavBar />
         {children}
       </body>

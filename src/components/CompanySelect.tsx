@@ -17,9 +17,9 @@ export const CompanySelect = ({ companies }: { companies: Company[] }) => {
 
   return (
     <Select.Root onValueChange={onChange} value={companyName}>
-      <Select.Trigger className='inline-flex h-[35px] items-center justify-center gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none text-violet-500 shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-violet-100 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-violet-600'>
+      <Select.Trigger className='inline-flex h-[35px] items-center justify-center gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none text-blue-600 shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-violet-100 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-blue-600'>
         <Select.Value placeholder='Select a company'>{companyName}</Select.Value>
-        <Select.Icon className='text-violet-500'>
+        <Select.Icon className='text-blue-600'>
           <ChevronDownIcon />
         </Select.Icon>
       </Select.Trigger>
@@ -41,7 +41,7 @@ export const CompanySelect = ({ companies }: { companies: Company[] }) => {
                 <Select.Item
                   value={name}
                   key={id}
-                  className='relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none text-gray-700 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet-300 data-[disabled]:text-gray-600 data-[highlighted]:text-gray-700 data-[highlighted]:outline-none'
+                  className='relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none text-gray-700 data-[disabled]:pointer-events-none data-[highlighted]:bg-blue-300 data-[disabled]:text-gray-600 data-[highlighted]:text-gray-700 data-[highlighted]:outline-none'
                 >
                   <Select.ItemText>{name}</Select.ItemText>
                   <Select.ItemIndicator className='absolute left-0 inline-flex w-[25px] items-center justify-center'>
@@ -51,7 +51,7 @@ export const CompanySelect = ({ companies }: { companies: Company[] }) => {
               ))}
             </Select.Group>
           </Select.Viewport>
-          <Select.ScrollDownButton className='flex h-[25px] cursor-default items-center justify-center bg-white text-violet-500'>
+          <Select.ScrollDownButton className='flex h-[25px] cursor-default items-center justify-center bg-white text-blue-500'>
             <ChevronDownIcon />
           </Select.ScrollDownButton>
         </Select.Content>

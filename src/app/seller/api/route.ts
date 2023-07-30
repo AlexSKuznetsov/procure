@@ -13,10 +13,14 @@ export async function GET(request: Request) {
     orderBy: { id: 'desc' },
     include: {
       company: true,
-      offers: true,
     },
     where: {
-      companyId: companyId || '',
+      AND: {
+        status: 'in progress',
+      },
+      NOT: {
+        companyId: companyId || '',
+      },
     },
   });
 
