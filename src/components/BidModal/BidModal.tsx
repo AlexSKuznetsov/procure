@@ -3,9 +3,8 @@
 import { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross1Icon, RocketIcon } from '@radix-ui/react-icons';
-import { BidForm } from '@/components/BidForm';
-import { Spinner } from './Spinner';
-import { Company } from '@prisma/client';
+import { BidForm } from '@/components/BidModal/BidForm';
+import { Spinner } from '../Spinner';
 
 type PropsType = {
   sellerId: string;

@@ -7,7 +7,7 @@ import {
   IdCardIcon,
 } from '@radix-ui/react-icons';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { BidModal } from '@/components/BidModal';
+import { BidModal } from '@/components/BidModal/BidModal';
 import { handleCancel } from '../lib/actions';
 import { LotType } from '@/types/lot';
 import { useCompanyStore } from '@/store/store';

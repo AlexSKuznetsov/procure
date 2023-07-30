@@ -1,0 +1,20 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { Company } from 'prisma/prisma-client';
+import { LotType } from '@/types/lot';
+
+export const useGetSellerData = (companyId: string | undefined) => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ['sellerdata'],
+    queryFn: () => axios.get(`http://localhost:3000/seller/api?companyId=${companyId}`),
+    refetchInterval: 1000 * 3,
+  });
+
+  if (data) {
+    return {
+      lots: data.data.lots as LotType[],
+    };
+  }
+
+  return { isError, isLoading };
+};

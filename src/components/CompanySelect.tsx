@@ -17,7 +17,7 @@ export const CompanySelect = ({ companies }: { companies: Company[] }) => {
 
   return (
     <Select.Root onValueChange={onChange} value={companyName}>
-      <Select.Trigger className='inline-flex h-[35px] items-center justify-center gap-[5px] rounded bg-white px-[15px] text-[13px] leading-none text-blue-600 shadow-[0_2px_10px] shadow-black/10 outline-none hover:bg-violet-100 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-blue-600'>
+      <Select.Trigger className='inline-flex  items-center justify-center gap-2  rounded px-[15px] text-[13px] leading-none text-blue-700  outline-none hover:bg-blue-100 focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-blue-600'>
         <Select.Value placeholder='Select a company'>{companyName}</Select.Value>
         <Select.Icon className='text-blue-600'>
           <ChevronDownIcon />

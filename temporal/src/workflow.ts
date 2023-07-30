@@ -16,28 +16,31 @@ export type BidPayload = {
   companyId: string;
 };
 
-const userInteraction = new Trigger<boolean>();
-export const cancelLotSignal = defineSignal('cancelSignal');
-
-export const handleBid = defineSignal<[BidPayload]>('handleBid');
-
-/** A workflow that simply calls an activity */
-export async function startProcureProcess(lot: {
+export type LotPayload = {
   name: string;
   description: string;
   duration: Duration;
   lotId: string;
   companyId: string;
-}): Promise<string> {
+};
+
+const userInteraction = new Trigger<boolean>();
+export const cancelLotSignal = defineSignal('cancelSignal');
+
+export const handleBid = defineSignal<[BidPayload]>('handleBid');
+
+export async function startProcureProcess(lot: LotPayload): Promise<string> {
   const { lotId } = lot;
 
   // save new lot to DB
   await saveLotToDb(lot);
 
+  // handle cancel signal
   setHandler(cancelLotSignal, () => {
     userInteraction.resolve(true);
   });
 
+  // handle bids signals
   setHandler(handleBid, (payload: BidPayload) => {
     addBidd(payload);
   });

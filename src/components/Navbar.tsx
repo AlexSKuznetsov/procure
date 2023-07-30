@@ -3,6 +3,9 @@
 import NextLink from 'next/link';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { usePathname } from 'next/navigation';
+import { CompanySelect } from './CompanySelect';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const navItems = [
   { text: 'Home', link: '/' },
@@ -12,6 +15,10 @@ const navItems = [
 
 export const NavBar = () => {
   const pathname = usePathname();
+  const { data } = useQuery({
+    queryKey: ['companies'],
+    queryFn: () => axios.get('http://localhost:3000/api'),
+  });
 
   return (
     <NavigationMenu.Root className='relative z-[1]'>
@@ -28,6 +35,7 @@ export const NavBar = () => {
             </NavigationMenu.Link>
           </NavigationMenu.Item>
         ))}
+        {data && <CompanySelect companies={data.data.companies} />}
       </NavigationMenu.List>
       <NavigationMenu.Viewport />
     </NavigationMenu.Root>

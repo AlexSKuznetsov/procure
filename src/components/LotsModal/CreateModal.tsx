@@ -3,10 +3,10 @@
 import { useState } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
-import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';
-import { Spinner } from './Spinner';
-import { CreateForm } from './CreateForm';
 import { useCompanyStore } from '@/store/store';
+import { Cross1Icon, PlusIcon } from '@radix-ui/react-icons';
+import { Spinner } from '../Spinner';
+import { CreateForm } from './CreateForm';
 
 export const CreateLot = () => {
   const { companyId } = useCompanyStore();

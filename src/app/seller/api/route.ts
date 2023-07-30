@@ -7,8 +7,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const companyId = searchParams.get('companyId');
 
-  const companies = await prisma.company.findMany();
-
   const lots = await prisma.lot.findMany({
     orderBy: { id: 'desc' },
     include: {
@@ -24,5 +22,5 @@ export async function GET(request: Request) {
     },
   });
 
-  return NextResponse.json({ companies, lots });
+  return NextResponse.json({ lots });
 }
