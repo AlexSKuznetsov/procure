@@ -74,7 +74,7 @@ export const addBidd = async (payload: BidPayload) => {
       data: {
         condition,
         description,
-        price,
+        price: new Prisma.Decimal(price),
         lotNumber: lotId,
         companyId: companyId,
       },

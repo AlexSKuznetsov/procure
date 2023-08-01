@@ -4,7 +4,7 @@ import { LotType } from '@/types/lot';
 
 export const useGetBuyerData = (companyId: string | undefined) => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ['buyerdata'],
+    queryKey: ['buyerdata', companyId],
     queryFn: () => axios.get(`http://localhost:3000/buyer/api?companyId=${companyId}`),
     refetchInterval: 1000 * 3,
   });
