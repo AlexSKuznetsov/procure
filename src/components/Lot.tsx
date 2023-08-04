@@ -12,6 +12,10 @@ import { handleCancel } from '../lib/actions';
 import { LotType } from '@/types/lot';
 import { useCompanyStore } from '@/store/store';
 import { BidsModal } from '@/components/BidsModal/BidsModal';
+import { LotStatus } from '@/components/LotStatus';
+import { LotInfo } from '@/components/LotInfo';
+
+type PropsType = LotType & { page: string };
 
 export const Lot = ({
   id,
@@ -24,7 +28,7 @@ export const Lot = ({
   createdAt,
   company,
   offers,
-}: LotType & { page: string }) => {
+}: PropsType) => {
   const { companyId: sellerId } = useCompanyStore();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,21 +43,7 @@ export const Lot = ({
             <span className=' text-gray-500'>Lot: {id}</span>
           </div>
           <div>
-            {status === 'finished' && (
-              <span className='rounded  border border-green-600  p-1 px-2 text-xs  text-green-600 shadow'>
-                completed
-              </span>
-            )}
-            {status === 'in progress' && (
-              <span className='rounded border border-blue-500 p-1 px-2 text-xs text-blue-500 shadow '>
-                in progress
-              </span>
-            )}
-            {status === 'terminated' && (
-              <span className='rounded border border-red-400 p-1 px-2 text-xs text-red-400 shadow'>
-                canceled
-              </span>
-            )}
+            <LotStatus status={status} />
           </div>
         </CardTitle>
         <CardDescription>{name}</CardDescription>
@@ -62,28 +52,12 @@ export const Lot = ({
         <p className='text-sm text-gray-700'>{description}</p>
       </CardContent>
       <CardFooter>
-        <div className='flex w-full flex-col space-y-1 text-gray-500'>
-          <div className='flex  space-x-2'>
-            <IdCardIcon />
-            <p className='text-xs'>{company.name}</p>
-          </div>
-
-          <div className='flex items-center space-x-2'>
-            <CalendarIcon />
-            <p className='text-xs'>{startDate}</p>
-          </div>
-          <div className='flex items-center space-x-2'>
-            <TimerIcon />
-            <p className='text-xs'>{duration}</p>
-          </div>
-
-          <div className='flex items-center'>
-            <div className='flex items-center space-x-2'>
-              <GearIcon />
-              <p className='text-xs text-gray-400'>{lotId}</p>
-            </div>
-          </div>
-        </div>
+        <LotInfo
+          companyName={company.name}
+          duration={duration}
+          lotId={lotId}
+          startDate={startDate}
+        />
         <div className='pb-[50px]'>
           <div>
             {isInProgress && !isLoading && page.toLowerCase() !== '/seller' && (

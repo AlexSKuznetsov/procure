@@ -52,6 +52,6 @@ export async function startProcureProcess(lot: LotPayload): Promise<string> {
     return await notify(lot);
   } else {
     await changeStatus(lotId, 'terminated');
-    return 'terminated';
+    return 'canceled';
   }
 }

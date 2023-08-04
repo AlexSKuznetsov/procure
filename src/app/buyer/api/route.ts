@@ -11,7 +11,11 @@ export async function GET(request: Request) {
     orderBy: { id: 'desc' },
     include: {
       company: true,
-      offers: true,
+      offers: {
+        include: {
+          company: true,
+        },
+      },
     },
     where: {
       companyId: companyId || '',

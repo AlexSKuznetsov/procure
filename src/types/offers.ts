@@ -1,13 +1,8 @@
 import { Prisma } from 'prisma/prisma-client';
 
 // https://github.com/prisma/prisma/discussions/10928
-export type LotType = Prisma.LotGetPayload<{
+export type OffersType = Prisma.OfferGetPayload<{
   include: {
     company: true;
-    offers: {
-      include: {
-        company: true;
-      };
-    };
   };
 }>;

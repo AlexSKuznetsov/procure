@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Cross1Icon, RocketIcon } from '@radix-ui/react-icons';
-import { Offer } from 'prisma/prisma-client';
+import { Cross1Icon } from '@radix-ui/react-icons';
 import { Spinner } from '../Spinner';
+import { OffersType } from '@/types/offers';
 
 type PropsType = {
-  offers: Offer[];
+  offers: OffersType[];
 };
 
 export const BidsModal = ({ offers }: PropsType) => {
@@ -17,7 +17,7 @@ export const BidsModal = ({ offers }: PropsType) => {
   return (
     <Dialog.Root open={open} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
-        <div className='absolute right-[10px] top-[175px] cursor-pointer rounded-full border border-gray-200 bg-red-400 px-3 py-1 text-xs font-bold text-white shadow hover:bg-slate-50 hover:text-gray-700'>
+        <div className='absolute right-[10px] top-[175px] cursor-pointer rounded-full border border-gray-200 bg-blue-600 px-3 py-1 text-xs font-bold text-white shadow hover:bg-slate-50 hover:text-gray-700'>
           {offers.length}
         </div>
       </Dialog.Trigger>
@@ -30,24 +30,20 @@ export const BidsModal = ({ offers }: PropsType) => {
                 <Cross1Icon />
               </Dialog.Close>
             </div>
-            <p className='my-4 text-xs font-thin text-gray-500'>
-              List of offers from defferent companies
-            </p>
+            <p className='my-4 text-xs font-thin text-gray-500'>List of offers from companies</p>
 
-            {/* <div className='grid grid-cols-4 gap-1'> */}
             {offers.map((bid) => (
               <div
                 key={bid.id}
-                className='grid grid-cols-[180px_50px_50px_150px_60px] items-center gap-1 py-1 text-xs text-gray-500'
+                className='grid grid-cols-[80px_60px_60px_200px_80px] items-center gap-2 py-1 text-xs text-gray-500 hover:bg-slate-200'
               >
-                <div className=''>{bid.companyId}</div>
-                <div>{bid.price as unknown as string}</div>
-                <div>{bid.condition}</div>
+                <div className='text-gray-700'>{bid.company.name}</div>
+                <div className='justify-self-end'>{bid.price as unknown as string}</div>
+                <div className='justify-self-end'>{bid.condition}</div>
                 <div className='justify-self-end'>{bid.description}</div>
-                <button className='rounded bg-green-500 px-2 py-1 text-white shadow'>winner</button>
+                <button className='rounded bg-green-600 px-2 py-1 text-white shadow'>pick</button>
               </div>
             ))}
-            {/* </div> */}
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Portal>
