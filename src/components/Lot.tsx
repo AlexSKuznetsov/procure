@@ -49,7 +49,7 @@ export const Lot = ({
         <CardDescription>{name}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className='text-sm text-gray-700'>{description}</p>
+        <p className='text-xs text-gray-600'>{description}</p>
       </CardContent>
       <CardFooter>
         <LotInfo
