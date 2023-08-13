@@ -1,24 +1,14 @@
 import { Duration } from '@temporalio/common/lib/time';
 import { PrismaClient, Prisma } from 'prisma/prisma-client';
-import { BidPayload } from './types';
+import { BidPayload, LotPayload } from './types';
 
-export async function notify(lot: {
-  name: string;
-  description: string;
-  duration: Duration;
-}): Promise<string> {
+export async function notify(lot: Partial<LotPayload>): Promise<string> {
   // await axios.post('', lot); // like we sendind an email
   //
   return `Procerement process for lot ${lot.name} has been finished!`;
 }
 
-export const saveLotToDb = async (lot: {
-  name: string;
-  description: string;
-  duration: Duration;
-  lotId: string;
-  companyId: string;
-}) => {
+export const saveLotToDb = async (lot: LotPayload) => {
   const client = new PrismaClient();
   const { description, duration, name, lotId, companyId } = lot;
   try {
