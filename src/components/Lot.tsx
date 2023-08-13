@@ -1,11 +1,5 @@
 import { useState } from 'react';
-import {
-  TimerIcon,
-  CrossCircledIcon,
-  CalendarIcon,
-  IdCardIcon,
-  GearIcon,
-} from '@radix-ui/react-icons';
+import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { BidModal } from '@/components/BidModal/BidModal';
 import { handleCancel } from '../lib/actions';
@@ -14,6 +8,7 @@ import { useCompanyStore } from '@/store/store';
 import { BidsModal } from '@/components/BidsModal/BidsModal';
 import { LotStatus } from '@/components/LotStatus';
 import { LotInfo } from '@/components/LotInfo';
+import { calculateEstimateEndDate } from '@/lib/utils';
 
 type PropsType = LotType & { page: string };
 
@@ -35,8 +30,10 @@ export const Lot = ({
   const isInProgress = status === 'in progress';
   const startDate = new Date(createdAt).toLocaleString();
 
+  const ends = calculateEstimateEndDate(createdAt as unknown as string, duration);
+
   return (
-    <Card className='relative m-2 w-[400px] bg-white shadow'>
+    <Card className='relative m-2 min-w-[400px] max-w-xl bg-white shadow'>
       <CardHeader>
         <CardTitle className='pointer-events-none flex items-center justify-between'>
           <div className='flex flex-row items-center gap-2'>
@@ -52,12 +49,7 @@ export const Lot = ({
         <p className='text-xs text-gray-600'>{description}</p>
       </CardContent>
       <CardFooter>
-        <LotInfo
-          companyName={company.name}
-          duration={duration}
-          lotId={lotId}
-          startDate={startDate}
-        />
+        <LotInfo companyName={company.name} duration={ends} lotId={lotId} startDate={startDate} />
         <div className='pb-[50px]'>
           <div>
             {isInProgress && !isLoading && page.toLowerCase() !== '/seller' && (
@@ -79,7 +71,7 @@ export const Lot = ({
           </div>
         </div>
       </CardFooter>
-      {offers && offers.length > 0 && <BidsModal offers={offers} />}
+      {offers && offers.length > 0 && <BidsModal offers={offers} lotStatus={status} />}
     </Card>
   );
 };

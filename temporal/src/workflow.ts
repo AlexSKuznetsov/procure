@@ -1,28 +1,11 @@
 import { proxyActivities, sleep, defineSignal, setHandler, Trigger } from '@temporalio/workflow';
 // Only import the activity types
 import type * as activities from './activities';
-import { Duration } from '@temporalio/common/lib/time';
+import { BidPayload, LotPayload } from './types';
 
 const { notify, changeStatus, saveLotToDb, addBidd } = proxyActivities<typeof activities>({
   startToCloseTimeout: '1 minute',
 });
-
-export type BidPayload = {
-  sellerId: string;
-  price: number;
-  description: string;
-  condition: string;
-  lotId: number;
-  companyId: string;
-};
-
-export type LotPayload = {
-  name: string;
-  description: string;
-  duration: Duration;
-  lotId: string;
-  companyId: string;
-};
 
 const userInteraction = new Trigger<boolean>();
 export const cancelLotSignal = defineSignal('cancelSignal');
@@ -45,6 +28,7 @@ export async function startProcureProcess(lot: LotPayload): Promise<string> {
     addBidd(payload);
   });
 
+  // TODO: add handle for picking bid winner with closing workflow
   const userInteracted = await Promise.race([sleep(lot.duration), userInteraction]);
 
   if (!userInteracted) {

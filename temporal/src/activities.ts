@@ -1,6 +1,6 @@
 import { Duration } from '@temporalio/common/lib/time';
 import { PrismaClient, Prisma } from 'prisma/prisma-client';
-import { BidPayload } from './workflow';
+import { BidPayload } from './types';
 
 export async function notify(lot: {
   name: string;

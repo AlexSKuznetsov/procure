@@ -9,7 +9,7 @@ export const LotList = ({ lots }: { lots: LotType[] }) => {
   const pathname = usePathname();
 
   return (
-    <ScrollArea.Root className='h-[calc(100vh-200px)] w-[420px] overflow-hidden rounded bg-white'>
+    <ScrollArea.Root className='h-[calc(100vh-200px)] max-w-xl overflow-hidden rounded bg-white'>
       <ScrollArea.Viewport className='h-full w-full rounded'>
         {lots && lots.map((el) => <Lot key={el.id} {...el} page={pathname} />)}
       </ScrollArea.Viewport>

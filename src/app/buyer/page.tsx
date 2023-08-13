@@ -18,7 +18,7 @@ const Byuer = () => {
       </div>
 
       <div className='mt-4 flex flex-col items-center space-y-2'>
-        <div className='flex w-[420px] items-end justify-between pt-2'>
+        <div className='flex w-[380px] items-end justify-between pt-2'>
           <h2 className='text-md text-yellow-500'>Lots list:</h2>
           {companyId && <CreateLot />}
         </div>
