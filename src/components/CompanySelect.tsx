@@ -43,7 +43,7 @@ export const CompanySelect = ({ companies }: { companies: Company[] }) => {
                   key={id}
                   className='relative flex h-[25px] select-none items-center rounded-[3px] pl-[25px] pr-[35px] text-[13px] leading-none text-gray-700 data-[disabled]:pointer-events-none data-[highlighted]:bg-blue-300 data-[disabled]:text-gray-600 data-[highlighted]:text-gray-700 data-[highlighted]:outline-none'
                 >
-                  <Select.ItemText>{name}</Select.ItemText>
+                  {name}
                   <Select.ItemIndicator className='absolute left-0 inline-flex w-[25px] items-center justify-center'>
                     <CheckIcon />
                   </Select.ItemIndicator>

@@ -27,7 +27,7 @@ export const BidsModal = ({ offers, lotStatus }: PropsType) => {
   return (
     <Dialog.Root open={open} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
-        <div className='absolute right-[10px] top-[175px] cursor-pointer rounded-full border border-gray-200 bg-blue-600 px-3 py-1 text-xs font-bold text-white shadow hover:bg-slate-50 hover:text-gray-700'>
+        <div className='absolute right-[10px] top-[175px] cursor-pointer rounded-full border border-gray-200 bg-blue-600 px-2 py-1 text-[10px] font-bold text-white shadow hover:bg-slate-50 hover:text-gray-700'>
           {offers.length}
         </div>
       </Dialog.Trigger>
