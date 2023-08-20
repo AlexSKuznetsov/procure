@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { Company } from 'prisma/prisma-client';
 import { LotType } from '@/types/lot';
 
 export const useGetSellerData = (companyId: string | undefined) => {

@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import { Spinner } from '../Spinner';
 import { OffersType } from '@/types/offers';
 
 type PropsType = {
@@ -13,7 +12,6 @@ type PropsType = {
 
 export const BidsModal = ({ offers, lotStatus }: PropsType) => {
   const [open, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   const getFormattedCurrency = useMemo(
     () => (number: string) =>
@@ -27,7 +25,7 @@ export const BidsModal = ({ offers, lotStatus }: PropsType) => {
   return (
     <Dialog.Root open={open} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
-        <div className='absolute right-[10px] top-[175px] cursor-pointer rounded-full border border-gray-200 bg-blue-600 px-2 py-1 text-[10px] font-bold text-white shadow hover:bg-slate-50 hover:text-gray-700'>
+        <div className='absolute right-[10px] top-[175px] cursor-pointer rounded-full border border-gray-200 bg-blue-500 px-2 py-1 text-[10px] font-bold text-white shadow hover:bg-slate-50 hover:text-gray-700'>
           {offers.length}
         </div>
       </Dialog.Trigger>

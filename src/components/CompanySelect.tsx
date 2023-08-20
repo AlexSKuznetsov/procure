@@ -4,7 +4,7 @@ import React from 'react';
 import * as Select from '@radix-ui/react-select';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { Company } from 'prisma/prisma-client';
-import { useCompanyStore } from '../store/store';
+import { useCompanyStore } from '@/store/store';
 
 export const CompanySelect = ({ companies }: { companies: Company[] }) => {
   const { companyName, setCompanyName, setCompanyId } = useCompanyStore();

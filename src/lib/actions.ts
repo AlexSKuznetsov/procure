@@ -4,7 +4,7 @@ import { LotType } from '@/types/lot';
 import { revalidatePath } from 'next/cache';
 import { Client, Connection } from '@temporalio/client';
 import { startProcureProcess, cancelLotSignal, handleBid } from '../../temporal/src/workflow';
-import { BidPayload } from '../../temporal/lib/types';
+import { BidPayload } from '../../temporal/src/types';
 import { v4 as uuidv4 } from 'uuid';
 
 export const handleSubmit = async (formData: LotType, companyId: string) => {

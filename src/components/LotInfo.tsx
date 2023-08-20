@@ -1,10 +1,4 @@
-import {
-  TimerIcon,
-  CrossCircledIcon,
-  CalendarIcon,
-  IdCardIcon,
-  GearIcon,
-} from '@radix-ui/react-icons';
+import { TimerIcon, CalendarIcon, IdCardIcon, GearIcon } from '@radix-ui/react-icons';
 
 type PropsType = {
   companyName: string;

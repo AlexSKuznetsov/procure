@@ -1,8 +1,8 @@
 import { Dispatch, FormEvent, SetStateAction } from 'react';
 import * as Label from '@radix-ui/react-label';
 import * as Dialog from '@radix-ui/react-dialog';
-import { handleSubmit } from '../../lib/actions';
-import { LotType } from '../../types/lot';
+import { handleSubmit } from '@/lib/actions';
+import { LotType } from '@/types/lot';
 
 type PropsType = {
   handleClose: () => void;
