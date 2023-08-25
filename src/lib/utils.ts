@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { addDays, subDays, formatDistance } from 'date-fns';
+import { addDays, addHours, differenceInMinutes, parseISO } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -9,20 +9,25 @@ export function cn(...inputs: ClassValue[]) {
 
 export const calculateEstimateEndDate = (startDateValue: string, durationValue: string) => {
   // Convert the start date string to a JavaScript Date object.
-  const startDate = new Date(startDateValue);
+  const startDate = parseISO(startDateValue);
+  const currentDate = new Date();
 
-  // Split the duration string into a list of words.
-  const durationWords = durationValue.split(' ');
+  const endDate = getEndDate(startDate, durationValue);
 
-  // Get the number of days from the duration string.
-  const durationNumber = Number(durationWords[0]);
+  const elapsedMinutes = differenceInMinutes(endDate, currentDate);
 
-  const durationDate = addDays(startDate, durationNumber);
+  const days = Math.floor(elapsedMinutes / (24 * 60));
+  const hours = Math.floor((elapsedMinutes % (24 * 60)) / 60);
+  const minutes = elapsedMinutes % 60;
 
-  const today = new Date();
+  return `${days} days ${hours} hours ${minutes} minutes`;
+};
 
-  const elapsedDays = formatDistance(today, durationDate);
-
-  // Format the result and return it.
-  return elapsedDays;
+const getEndDate = (startDate: Date, duration: string) => {
+  const durationWords = duration.split(' ');
+  if (durationWords[1].includes('day')) {
+    return addDays(startDate, parseInt(durationWords[0]));
+  } else {
+    return addHours(startDate, parseInt(durationWords[0]));
+  }
 };

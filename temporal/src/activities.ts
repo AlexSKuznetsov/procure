@@ -1,4 +1,3 @@
-import { Duration } from '@temporalio/common/lib/time';
 import { PrismaClient, Prisma } from 'prisma/prisma-client';
 import { BidPayload, LotPayload } from './types';
 
