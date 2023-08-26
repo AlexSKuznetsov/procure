@@ -1,9 +1,42 @@
 import { PrismaClient, Prisma } from 'prisma/prisma-client';
 import { BidPayload, LotPayload } from './types';
 
-export async function notify(lot: Partial<LotPayload>): Promise<string> {
+export async function notify(
+  lot: Partial<LotPayload>,
+  winner: string | undefined,
+): Promise<string> {
   // await axios.post('', lot); // like we sendind an email
-  //
+
+  if (winner) {
+    const client = new PrismaClient();
+
+    try {
+      const result = await client.offer.findUnique({
+        where: {
+          id: winner,
+        },
+        include: {
+          company: true,
+        },
+      });
+
+      if (result) {
+        return `The winner is ${result.company.name} with price: ${parseInt(
+          result.price as unknown as string,
+          10,
+        )}`;
+      }
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        throw new Error(e.message);
+      } else {
+        throw new Error('Error while populating winner from DB');
+      }
+    } finally {
+      client.$disconnect();
+    }
+  }
+
   return `Procerement process for lot ${lot.name} has been finished!`;
 }
 
@@ -55,7 +88,7 @@ export const changeStatus = async (lotId: string, status: string) => {
 };
 
 export const addBidd = async (payload: BidPayload) => {
-  const { companyId, condition, description, lotId, price, sellerId } = payload;
+  const { companyId, condition, description, lotId, price } = payload;
   const client = new PrismaClient();
 
   try {

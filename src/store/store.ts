@@ -1,7 +1,7 @@
 'use client';
 
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
 
 type CompanyState = {
   companyName: string | undefined;

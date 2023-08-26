@@ -3,7 +3,12 @@
 import { LotType } from '@/types/lot';
 import { revalidatePath } from 'next/cache';
 import { Client, Connection } from '@temporalio/client';
-import { startProcureProcess, cancelLotSignal, handleBid } from '../../temporal/src/workflow';
+import {
+  startProcureProcess,
+  cancelLotSignal,
+  handleBid,
+  winnerSignal,
+} from '../../temporal/src/workflow';
 import { BidPayload } from '../../temporal/src/types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -52,5 +57,18 @@ export const handleAddBid = async (lotId: string, payload: BidPayload) => {
     await handle.signal(handleBid, payload);
   } catch (e) {
     console.log('Failed to handle bid signal', e);
+  }
+};
+
+export const handleBidPick = async (lotId: string, bidId: string) => {
+  const connection = await Connection.connect({});
+  const client = new Client({ connection });
+
+  const handle = client.workflow.getHandle(lotId);
+
+  try {
+    await handle.signal(winnerSignal, bidId);
+  } catch (e) {
+    console.log('Failed to pick a Bid', e);
   }
 };

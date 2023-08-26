@@ -28,6 +28,7 @@ export const Lot = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const isInProgress = status === 'in progress';
+  const isFinished = status === 'finished' || status === 'terminated';
   const startDate = new Date(createdAt).toLocaleString();
 
   const ends = calculateEstimateEndDate(createdAt as unknown as string, duration);
@@ -37,7 +38,7 @@ export const Lot = ({
       <CardHeader>
         <CardTitle className='pointer-events-none flex items-center justify-between'>
           <div className='flex flex-row items-center gap-2'>
-            <span className=' text-gray-500'>Lot: {id}</span>
+            <span className='text-gray-500'>Lot: {id}</span>
           </div>
           <div>
             <LotStatus status={status} />
@@ -49,7 +50,12 @@ export const Lot = ({
         <p className='text-xs text-gray-600'>{description}</p>
       </CardContent>
       <CardFooter>
-        <LotInfo companyName={company.name} duration={ends} lotId={lotId} startDate={startDate} />
+        <LotInfo
+          companyName={company.name}
+          duration={isFinished ? '-' : ends}
+          lotId={lotId}
+          startDate={startDate}
+        />
         <div className='pb-[50px]'>
           <div>
             {isInProgress && !isLoading && page.toLowerCase() !== '/seller' && (
@@ -71,7 +77,9 @@ export const Lot = ({
           </div>
         </div>
       </CardFooter>
-      {offers && offers.length > 0 && <BidsModal offers={offers} lotStatus={status} />}
+      {offers && offers.length > 0 && (
+        <BidsModal offers={offers} lotStatus={status} lotId={lotId} />
+      )}
     </Card>
   );
 };

@@ -4,13 +4,15 @@ import { useState, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import { OffersType } from '@/types/offers';
+import { handleBidPick } from '@/lib/actions';
 
 type PropsType = {
   offers: OffersType[];
   lotStatus: string;
+  lotId: string;
 };
 
-export const BidsModal = ({ offers, lotStatus }: PropsType) => {
+export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
   const [open, setIsOpen] = useState(false);
 
   const getFormattedCurrency = useMemo(
@@ -21,6 +23,11 @@ export const BidsModal = ({ offers, lotStatus }: PropsType) => {
       }).format(parseFloat(number)),
     [],
   );
+
+  const onBidPick = (bidId: string) => {
+    handleBidPick(lotId, bidId);
+    setIsOpen(false);
+  };
 
   return (
     <Dialog.Root open={open} onOpenChange={setIsOpen}>
@@ -51,8 +58,11 @@ export const BidsModal = ({ offers, lotStatus }: PropsType) => {
                 </div>
                 <div className='justify-self-end'>{bid.condition}</div>
                 <div className='justify-self-end'>{bid.description}</div>
-                {lotStatus !== 'terminated' && (
-                  <button className='w-[50px] rounded bg-green-600 py-1 text-white shadow'>
+                {lotStatus !== 'terminated' && lotStatus !== 'finished' && (
+                  <button
+                    className='w-[50px] rounded bg-green-600 py-1 text-white shadow'
+                    onClick={() => onBidPick(bid.id)}
+                  >
                     pick
                   </button>
                 )}
