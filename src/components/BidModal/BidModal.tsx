@@ -17,7 +17,7 @@ export const BidModal = ({ sellerId, lotId, lotNumber }: PropsType) => {
   return (
     <Dialog.Root open={open} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
-        <div className='flex cursor-pointer space-x-2 rounded border border-yellow-500 px-2 py-1 text-yellow-600 shadow hover:bg-gray-100'>
+        <div className='flex cursor-pointer space-x-2 rounded border border-yellow-600 px-2 py-1 text-yellow-600 shadow hover:bg-gray-100'>
           <RocketIcon />
           <span className='text-xs'>bid</span>
         </div>

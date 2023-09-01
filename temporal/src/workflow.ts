@@ -46,7 +46,7 @@ export async function startProcureProcess(lot: LotPayload): Promise<string> {
   const userInteracted = await Promise.race([
     sleep(duration), // waiting lot duration
     userInteraction, // cancel lot signal
-    await condition(() => winner !== undefined), // winner picked
+    condition(() => winner !== undefined), // winner picked
   ]);
 
   if (!userInteracted) {

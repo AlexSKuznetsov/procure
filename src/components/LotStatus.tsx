@@ -1,7 +1,7 @@
 export const LotStatus = ({ status }: { status: string }) => {
   if (status === 'finished') {
     return (
-      <span className='rounded  border border-green-600  p-1 px-2 text-xs  text-green-600 shadow'>
+      <span className='rounded border border-green-600  p-1 px-2 text-[10px] uppercase text-green-600'>
         completed
       </span>
     );
@@ -9,7 +9,7 @@ export const LotStatus = ({ status }: { status: string }) => {
 
   if (status === 'in progress') {
     return (
-      <span className='rounded border border-blue-500 p-1 px-2 text-xs text-blue-500 shadow '>
+      <span className='rounded border border-blue-500 p-1 px-2 text-[10px] uppercase text-blue-500'>
         in progress
       </span>
     );
@@ -17,7 +17,7 @@ export const LotStatus = ({ status }: { status: string }) => {
 
   if (status === 'terminated') {
     return (
-      <span className='rounded border border-red-400 p-1 px-2 text-xs text-red-400 shadow'>
+      <span className='rounded border border-red-500 p-1 px-2 text-[10px] uppercase text-red-500'>
         canceled
       </span>
     );

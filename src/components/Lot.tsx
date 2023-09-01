@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CrossCircledIcon } from '@radix-ui/react-icons';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { BidModal } from '@/components/BidModal/BidModal';
 import { handleCancel } from '@/lib/actions';
@@ -34,7 +34,7 @@ export const Lot = ({
   const ends = calculateEstimateEndDate(createdAt as unknown as string, duration);
 
   return (
-    <Card className='relative m-2 min-w-[400px] max-w-xl bg-white shadow'>
+    <Card className='relative m-2 min-w-[400px] max-w-md bg-white shadow'>
       <CardHeader>
         <CardTitle className='pointer-events-none flex items-center justify-between'>
           <div className='flex flex-row items-center gap-2'>
@@ -60,15 +60,15 @@ export const Lot = ({
           <div>
             {isInProgress && !isLoading && page.toLowerCase() !== '/seller' && (
               <div
-                className='group flex cursor-pointer items-center space-x-1 rounded border border-gray-400 p-1 group-hover:border-red-500'
+                className='group flex cursor-pointer items-center space-x-1 rounded border border-red-500 p-1 hover:bg-slate-100'
                 onClick={async () => {
                   setIsLoading(true);
                   await handleCancel(lotId);
                   setIsLoading(false);
                 }}
               >
-                <CrossCircledIcon className='text-gray-400 group-hover:text-red-600' />
-                <span className='text-xs text-gray-400 group-hover:text-red-500'>cancel</span>
+                <Cross2Icon className='h-3 w-3 text-red-600' />
+                <span className='text-xs text-red-600'>cancel</span>
               </div>
             )}
             {page.toLowerCase() === '/seller' && sellerId && (

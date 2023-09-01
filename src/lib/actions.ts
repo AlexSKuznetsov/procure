@@ -65,7 +65,6 @@ export const handleBidPick = async (lotId: string, bidId: string) => {
   const client = new Client({ connection });
 
   const handle = client.workflow.getHandle(lotId);
-
   try {
     await handle.signal(winnerSignal, bidId);
   } catch (e) {

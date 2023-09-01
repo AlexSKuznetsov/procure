@@ -2,9 +2,10 @@
 
 import { useState, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Cross1Icon } from '@radix-ui/react-icons';
+import { Cross1Icon, BackpackIcon, CheckIcon } from '@radix-ui/react-icons';
 import { OffersType } from '@/types/offers';
 import { handleBidPick } from '@/lib/actions';
+import { Tooltip } from '../Tooltip';
 
 type PropsType = {
   offers: OffersType[];
@@ -32,8 +33,9 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
   return (
     <Dialog.Root open={open} onOpenChange={setIsOpen}>
       <Dialog.Trigger asChild>
-        <div className='absolute right-[10px] top-[175px] inline-flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border-2 border-white bg-red-500 text-xs font-bold text-white hover:bg-slate-50 hover:text-gray-700'>
-          {offers.length}
+        <div className='absolute bottom-[15px] right-[10px] flex cursor-pointer items-center space-x-2 rounded-xl bg-blue-600 px-2 text-white hover:bg-blue-400'>
+          <BackpackIcon className='h-3 w-3' />
+          <div className='inline-flex h-6 items-center text-xs font-bold'>{offers.length}</div>
         </div>
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -50,7 +52,7 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
             {offers.map((bid) => (
               <div
                 key={bid.id}
-                className='grid grid-cols-[70px_50px_60px_120px_80px] items-center gap-2 py-1 text-xs text-gray-500 hover:bg-slate-200'
+                className='grid grid-cols-[70px_50px_60px_110px_80px] items-center gap-2 py-1 text-xs text-gray-500 hover:bg-slate-200'
               >
                 <div className='text-gray-700'>{bid.company.name}</div>
                 <div className='justify-self-end'>
@@ -60,10 +62,11 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
                 <div className='justify-self-end'>{bid.description}</div>
                 {lotStatus !== 'terminated' && lotStatus !== 'finished' && (
                   <button
-                    className='w-[50px] rounded bg-green-600 py-1 text-white shadow'
+                    className='flex w-[50px] space-x-1 rounded bg-green-600 py-1 text-white shadow'
                     onClick={() => onBidPick(bid.id)}
                   >
-                    pick
+                    <CheckIcon className='ml-1' />
+                    <span>pick</span>
                   </button>
                 )}
               </div>
