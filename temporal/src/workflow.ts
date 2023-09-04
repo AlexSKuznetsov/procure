@@ -6,7 +6,6 @@ import {
   Trigger,
   condition,
 } from '@temporalio/workflow';
-// Only import the activity types
 import type * as activities from './activities';
 import { BidPayload, LotPayload } from './types';
 

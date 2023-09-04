@@ -2,10 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Cross1Icon, BackpackIcon, CheckIcon } from '@radix-ui/react-icons';
+import { Cross1Icon, BackpackIcon } from '@radix-ui/react-icons';
 import { OffersType } from '@/types/offers';
 import { handleBidPick } from '@/lib/actions';
-import { Tooltip } from '../Tooltip';
 
 type PropsType = {
   offers: OffersType[];
@@ -62,11 +61,10 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
                 <div className='justify-self-end'>{bid.description}</div>
                 {lotStatus !== 'terminated' && lotStatus !== 'finished' && (
                   <button
-                    className='flex w-[50px] space-x-1 rounded bg-green-600 py-1 text-white shadow'
+                    className='flex w-[50px] rounded bg-gray-400 py-1 text-white shadow hover:bg-green-500'
                     onClick={() => onBidPick(bid.id)}
                   >
-                    <CheckIcon className='ml-1' />
-                    <span>pick</span>
+                    <span className='pl-3'>pick</span>
                   </button>
                 )}
               </div>
