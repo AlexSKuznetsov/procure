@@ -60,7 +60,7 @@ export const Lot = ({
           <div>
             {isInProgress && !isLoading && page.toLowerCase() !== '/seller' && (
               <div
-                className='group flex cursor-pointer items-center space-x-1 rounded border border-red-500 p-1 hover:bg-slate-100'
+                className='group flex cursor-pointer items-center space-x-1 rounded border border-red-500 p-0.5 px-1 hover:bg-slate-100'
                 onClick={async () => {
                   setIsLoading(true);
                   await handleCancel(lotId);
