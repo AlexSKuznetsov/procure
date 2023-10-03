@@ -1,3 +1,4 @@
+import { Context } from '@temporalio/activity';
 import { PrismaClient, Prisma } from 'prisma/prisma-client';
 import { BidPayload, LotPayload } from './types';
 
@@ -6,6 +7,7 @@ export async function notify(
   winner: string | undefined,
 ): Promise<string> {
   // await axios.post('', lot); // like we sendind an email
+  Context.current().log.info('Notify by email');
 
   if (winner) {
     const client = new PrismaClient();
