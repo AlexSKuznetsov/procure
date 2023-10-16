@@ -17,9 +17,9 @@ const Byuer = () => {
       </div>
 
       <div className='mt-4 flex flex-col items-center space-y-2'>
-        <div className='flex w-[430px] items-end justify-between pt-2'>
+        <div className='flex w-[410px] items-end justify-between pt-2'>
           <div className='text-md flex items-center justify-center text-yellow-500'>
-            <h2 className='mr-2'>Lots count:</h2>
+            <h2 className='mr-2'>Total lots count:</h2>
             <div className='rounded-xl border px-2 text-sm text-white'>{lots?.length}</div>
           </div>
           {companyId && <CreateLot />}

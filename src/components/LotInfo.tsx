@@ -36,7 +36,7 @@ export const LotInfo = ({ companyName, startDate, duration, lotId }: PropsType) 
           <Tooltip content='Workflow ID'>
             <GearIcon />
           </Tooltip>
-          <p className='text-xs text-gray-400'>{lotId}</p>
+          <p className='text-[10px] text-gray-400'>{lotId}</p>
         </div>
       </div>
     </div>
