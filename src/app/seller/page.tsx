@@ -6,7 +6,7 @@ import { useCompanyStore } from '@/store/store';
 import { useGetSellerData } from './hooks';
 
 const Seller = () => {
-  const { companyId, companyName } = useCompanyStore();
+  const { companyId } = useCompanyStore();
   const { lots } = useGetSellerData(companyId);
 
   return (
