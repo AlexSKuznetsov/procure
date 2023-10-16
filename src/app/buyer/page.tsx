@@ -14,12 +14,14 @@ const Byuer = () => {
     <div className='mt-2 h-[calc(100vh-50px)]'>
       <div className='flex items-center justify-center gap-2 pt-2'>
         <PageHeader text='Buyer page' />
-        <span className='text-xl font-semibold text-blue-600'>{companyName}</span>
       </div>
 
       <div className='mt-4 flex flex-col items-center space-y-2'>
         <div className='flex w-[380px] items-end justify-between pt-2'>
-          <h2 className='text-md text-yellow-500'>Lots list:</h2>
+          <div className='text-md flex items-center justify-center text-yellow-500'>
+            <h2 className='mr-2'>Lots count</h2>
+            <div className='rounded-xl border px-2 text-sm text-white'>{lots?.length}</div>
+          </div>
           {companyId && <CreateLot />}
         </div>
         {lots && lots.length > 0 && <LotList lots={lots} />}
