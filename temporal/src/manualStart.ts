@@ -2,6 +2,7 @@ import { Client, Connection } from '@temporalio/client';
 import { startProcureProcess } from '../../temporal/src/workflow';
 import { PrismaClient } from 'prisma/prisma-client';
 import { v4 as uuidv4 } from 'uuid';
+import { faker } from '@faker-js/faker';
 
 // npx tsx ./temporal/src/manualStart.ts
 
@@ -17,13 +18,12 @@ const startMultipleWorkflows = async (count: number) => {
       .forEach(async (_, i) => {
         try {
           const lotId = uuidv4();
-          const description = `lorem ipsum`;
           const result = await client.workflow.start(startProcureProcess, {
             workflowId: lotId,
             args: [
               {
-                name: `Auto lot + ${i}`,
-                description,
+                name: faker.commerce.productName(),
+                description: faker.commerce.productDescription(),
                 duration: '60 sec',
                 lotId,
                 companyId: company.id,
