@@ -34,11 +34,13 @@ export const CreateLot = () => {
               </Dialog.Close>
             </div>
 
-            <CreateForm
-              handleClose={handleClose}
-              setIsLoading={setIsLoading}
-              companyId={companyId}
-            />
+            {companyId && (
+              <CreateForm
+                handleClose={handleClose}
+                setIsLoading={setIsLoading}
+                companyId={companyId}
+              />
+            )}
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Portal>

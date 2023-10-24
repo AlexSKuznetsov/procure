@@ -9,6 +9,8 @@ import { BidsModal } from '@/components/BidsModal/BidsModal';
 import { LotStatus } from '@/components/LotStatus';
 import { LotInfo } from '@/components/LotInfo';
 import { calculateEstimateEndDate } from '@/lib/utils';
+import { QueryKeys } from '@/lib/constants';
+import { queryClient } from '@/components/QueryProvider';
 
 type PropsType = LotType & { page: string };
 
@@ -64,6 +66,10 @@ export const Lot = ({
                 onClick={async () => {
                   setIsLoading(true);
                   await handleCancel(lotId);
+
+                  setTimeout(() => {
+                    queryClient.invalidateQueries({ queryKey: [QueryKeys.BUYER_PAGE] });
+                  }, 1000);
                   setIsLoading(false);
                 }}
               >

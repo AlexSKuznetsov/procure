@@ -5,6 +5,8 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Cross1Icon, BackpackIcon } from '@radix-ui/react-icons';
 import { OffersType } from '@/types/offers';
 import { handleBidPick } from '@/lib/actions';
+import { QueryKeys } from '@/lib/constants';
+import { queryClient } from '@/components/QueryProvider';
 
 type PropsType = {
   offers: OffersType[];
@@ -26,6 +28,11 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
 
   const onBidPick = (bidId: string) => {
     handleBidPick(lotId, bidId);
+
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.BUYER_PAGE] });
+    }, 1000);
+
     setIsOpen(false);
   };
 

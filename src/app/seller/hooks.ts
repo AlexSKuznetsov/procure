@@ -6,7 +6,7 @@ export const useGetSellerData = (companyId: string | undefined) => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ['sellerdata', companyId],
     queryFn: () => axios.get(`http://localhost:3000/seller/api?companyId=${companyId}`),
-    refetchInterval: 1000 * 3,
+    enabled: Boolean(companyId),
   });
 
   if (data) {

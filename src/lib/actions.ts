@@ -1,7 +1,6 @@
 'use server';
 
 import { LotType } from '@/types/lot';
-import { revalidatePath } from 'next/cache';
 import { Client, Connection } from '@temporalio/client';
 import {
   startProcureProcess,
@@ -20,21 +19,15 @@ export const handleSubmit = async (formData: LotType, companyId: string) => {
   const lotId = uuidv4();
 
   try {
-    const result = await client.workflow.start(startProcureProcess, {
+    await client.workflow.start(startProcureProcess, {
       workflowId: lotId,
       args: [{ name, description, duration, lotId, companyId }],
       taskQueue: 'start-procur',
     });
-
-    return result.workflowId;
   } catch (e) {
     return new Error('Failed to start procure workflow');
   }
 };
-
-export async function revalidate(path: string) {
-  revalidatePath(path);
-}
 
 export const handleCancel = async (lotId: string) => {
   const connection = await Connection.connect({});

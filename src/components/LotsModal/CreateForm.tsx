@@ -2,12 +2,14 @@ import { Dispatch, FormEvent, SetStateAction } from 'react';
 import * as Label from '@radix-ui/react-label';
 import * as Dialog from '@radix-ui/react-dialog';
 import { handleSubmit } from '@/lib/actions';
+import { QueryKeys } from '@/lib/constants';
 import { LotType } from '@/types/lot';
+import { queryClient } from '@/components/QueryProvider';
 
 type PropsType = {
   handleClose: () => void;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
-  companyId: string | undefined;
+  companyId: string;
 };
 
 export const CreateForm = ({ handleClose, setIsLoading, companyId }: PropsType) => {
@@ -19,7 +21,12 @@ export const CreateForm = ({ handleClose, setIsLoading, companyId }: PropsType) 
     const formData = new FormData(form) as unknown as Iterable<[LotType, FormDataEntryValue]>;
     const requestData: LotType = Object.fromEntries(formData);
 
-    await handleSubmit(requestData, companyId as string);
+    await handleSubmit(requestData, companyId);
+
+    setTimeout(() => {
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.BUYER_PAGE, companyId] });
+    }, 1000);
+
     handleClose();
     setIsLoading(false);
   };
