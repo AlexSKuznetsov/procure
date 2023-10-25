@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross1Icon, BackpackIcon, CheckboxIcon, BoxIcon } from '@radix-ui/react-icons';
 import { cn } from '@/lib/utils';
-import { Table } from '@radix-ui/themes';
+import { Table, HoverCard, Box, Text } from '@radix-ui/themes';
 import { OffersType } from '@/types/offers';
 import { handleBidPick } from '@/lib/actions';
 import { QueryKeys } from '@/lib/constants';
@@ -43,7 +43,7 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
     }
   };
 
-  const renderTableHeader = () => {
+  const renderTableHeader = useMemo(() => {
     return (
       <>
         <Table.Header>
@@ -57,9 +57,9 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
         </Table.Header>
       </>
     );
-  };
+  }, []);
 
-  const renderTableBody = () => {
+  const renderTableBody = useCallback(() => {
     return (
       <Table.Body>
         {offers.map((item) => (
@@ -70,9 +70,7 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
             <Table.Cell className='text-xs text-gray-500' align='center'>
               {getFormattedCurrency(item.price as unknown as string)}
             </Table.Cell>
-            <Table.Cell className='text-xs text-gray-500' align='center'>
-              {item.description}
-            </Table.Cell>
+            <Table.Cell align='center'>{renderDescriptionField(item.description)}</Table.Cell>
             <Table.Cell align='center'>
               {lotStatus !== 'terminated' && lotStatus !== 'finished' && (
                 <button className='group flex items-center' onClick={() => setBidId(item.id)}>
@@ -87,6 +85,25 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
           </Table.Row>
         ))}
       </Table.Body>
+    );
+  }, [bidId, offers]);
+
+  const renderDescriptionField = (text: string) => {
+    return (
+      <HoverCard.Root>
+        <HoverCard.Trigger>
+          <div className='w-[100px] overflow-hidden'>
+            <span className='text-ellipsis whitespace-nowrap text-xs text-gray-500'>{text}</span>
+          </div>
+        </HoverCard.Trigger>
+        <HoverCard.Content>
+          <Box>
+            <Text as='div' size='2'>
+              {text}
+            </Text>
+          </Box>
+        </HoverCard.Content>
+      </HoverCard.Root>
     );
   };
 
@@ -110,7 +127,7 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
             <p className='my-4 text-xs text-gray-500'>List of offers from companies</p>
 
             <Table.Root variant='surface'>
-              {renderTableHeader()}
+              {renderTableHeader}
               {renderTableBody()}
             </Table.Root>
             {lotStatus !== 'terminated' && lotStatus !== 'finished' && (
