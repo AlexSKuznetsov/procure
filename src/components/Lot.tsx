@@ -69,8 +69,8 @@ export const Lot = ({
 
                   setTimeout(() => {
                     queryClient.invalidateQueries({ queryKey: [QueryKeys.BUYER_PAGE] });
+                    setIsLoading(false);
                   }, 1000);
-                  setIsLoading(false);
                 }}
               >
                 <Cross2Icon className='h-3 w-3 text-red-600' />

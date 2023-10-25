@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NavBar } from '@/components/Navbar';
 import { QueryProvider } from '@/components/QueryProvider';
+import { Theme } from '@radix-ui/themes';
+import '@radix-ui/themes/styles.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -16,7 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <QueryProvider>
       <html lang='en'>
         <body className={`${inter.variable} bg-slate-900 font-sans`}>
-          <NavBar />
+          <Theme>
+            <NavBar />
+          </Theme>
           {children}
         </body>
       </html>
