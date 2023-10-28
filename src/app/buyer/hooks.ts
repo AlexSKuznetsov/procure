@@ -6,7 +6,7 @@ import { QueryKeys } from '@/lib/constants';
 export const useGetBuyerData = (companyId: string | undefined) => {
   const { data, isError, isLoading } = useQuery({
     queryKey: [QueryKeys.BUYER_PAGE, companyId],
-    queryFn: () => axios.get(`http://localhost:3000/buyer/api?companyId=${companyId}`),
+    queryFn: () => axios.get(`buyer/api?companyId=${companyId}`),
     enabled: Boolean(companyId),
   });
 

@@ -1,24 +1,18 @@
 'use client';
 
+import axios from 'axios';
 import NextLink from 'next/link';
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import { usePathname } from 'next/navigation';
-import { Company } from 'prisma/prisma-client';
-import { CompanySelect } from './CompanySelect';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-
-const navItems = [
-  { text: 'Home', link: '/' },
-  { text: 'Buyer', link: '/buyer' },
-  { text: 'Seller', link: '/seller' },
-];
+import { CompanySelect } from './CompanySelect';
+import { navItems } from '@/lib/constants';
 
 export const NavBar = () => {
   const pathname = usePathname();
   const { data } = useQuery({
     queryKey: ['companies'],
-    queryFn: () => axios.get('http://localhost:3000/api'),
+    queryFn: () => axios.get('api'),
   });
 
   return (

@@ -5,7 +5,7 @@ import { LotType } from '@/types/lot';
 export const useGetSellerData = (companyId: string | undefined) => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ['sellerdata', companyId],
-    queryFn: () => axios.get(`http://localhost:3000/seller/api?companyId=${companyId}`),
+    queryFn: () => axios.get(`seller/api?companyId=${companyId}`),
     enabled: Boolean(companyId),
   });
 
