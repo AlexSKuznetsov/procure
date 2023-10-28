@@ -6,6 +6,7 @@ import { Cross1Icon, BackpackIcon, CheckboxIcon, BoxIcon } from '@radix-ui/react
 import { cn } from '@/lib/utils';
 import { Table, HoverCard, Box, Text } from '@radix-ui/themes';
 import { OffersType } from '@/types/offers';
+import { Tooltip } from '@/components/Tooltip';
 import { handleBidPick } from '@/lib/actions';
 import { QueryKeys } from '@/lib/constants';
 import { queryClient } from '@/components/QueryProvider';
@@ -77,7 +78,9 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
                   {bidId === item.id ? (
                     <CheckboxIcon className='text-green-600' />
                   ) : (
-                    <BoxIcon className='h-3 text-gray-500 group-hover:text-green-600' />
+                    <Tooltip content='Pick offer'>
+                      <BoxIcon className='h-3 text-gray-500 group-hover:text-green-600' />
+                    </Tooltip>
                   )}
                 </button>
               )}
@@ -132,12 +135,12 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
             </Table.Root>
             {lotStatus !== 'terminated' && lotStatus !== 'finished' && (
               <div className='mt-8 space-x-6 text-right'>
-                <Dialog.Close className='rounded  px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-600'>
+                <Dialog.Close className='rounded  px-4 py-2 text-sm text-gray-600 hover:text-gray-800'>
                   Cancel
                 </Dialog.Close>
                 <button
                   className={cn(
-                    'cursor-default rounded bg-gray-600 px-4 py-1.5 text-sm font-medium text-white shadow',
+                    'cursor-default rounded bg-gray-600 px-4 py-1.5 text-sm text-white shadow',
                     {
                       ['cursor-pointer bg-gray-900 hover:bg-green-600']: Boolean(bidId),
                     },

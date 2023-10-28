@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { BidModal } from '@/components/BidModal/BidModal';
+import { Tooltip } from '@/components/Tooltip';
 import { handleCancel } from '@/lib/actions';
 import { LotType } from '@/types/lot';
 import { useCompanyStore } from '@/store/store';
@@ -61,21 +62,23 @@ export const Lot = ({
         <div className='pb-[50px]'>
           <div>
             {isInProgress && !isLoading && page.toLowerCase() !== '/seller' && (
-              <div
-                className='group flex cursor-pointer items-center space-x-1 rounded border border-red-500 p-0.5 px-1 hover:bg-slate-100'
-                onClick={async () => {
-                  setIsLoading(true);
-                  await handleCancel(lotId);
+              <Tooltip content='Terminate lot'>
+                <div
+                  className='group flex cursor-pointer items-center space-x-1 rounded border border-red-500 p-0.5 px-1 hover:bg-slate-100'
+                  onClick={async () => {
+                    setIsLoading(true);
+                    await handleCancel(lotId);
 
-                  setTimeout(() => {
-                    queryClient.invalidateQueries({ queryKey: [QueryKeys.BUYER_PAGE] });
-                    setIsLoading(false);
-                  }, 1000);
-                }}
-              >
-                <Cross2Icon className='h-3 w-3 text-red-600' />
-                <span className='text-xs text-red-600'>cancel</span>
-              </div>
+                    setTimeout(() => {
+                      queryClient.invalidateQueries({ queryKey: [QueryKeys.BUYER_PAGE] });
+                      setIsLoading(false);
+                    }, 1000);
+                  }}
+                >
+                  <Cross2Icon className='h-3 w-3 text-red-600' />
+                  <span className='text-xs text-red-600'>cancel</span>
+                </div>
+              </Tooltip>
             )}
             {page.toLowerCase() === '/seller' && sellerId && (
               <BidModal sellerId={sellerId} lotId={lotId} lotNumber={id} />
