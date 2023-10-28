@@ -147,7 +147,7 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
                   )}
                   onClick={onBidPick}
                 >
-                  Save
+                  Confirm
                 </button>
               </div>
             )}
