@@ -89,7 +89,7 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
         ))}
       </Table.Body>
     );
-  }, [bidId, offers]);
+  }, [bidId, offers, lotStatus]);
 
   const renderDescriptionField = (text: string) => {
     return (
