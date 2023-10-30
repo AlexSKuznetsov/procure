@@ -10,6 +10,7 @@ import { Tooltip } from '@/components/Tooltip';
 import { handleBidPick } from '@/lib/actions';
 import { QueryKeys } from '@/lib/constants';
 import { queryClient } from '@/components/QueryProvider';
+import { format } from 'date-fns';
 
 type PropsType = {
   offers: OffersType[];
@@ -49,7 +50,7 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
       <>
         <Table.Header>
           <Table.Row>
-            {['Company', 'Price', 'Description', 'Action'].map((item) => (
+            {['Company', 'Price', 'Description', 'Date', 'Action'].map((item) => (
               <Table.ColumnHeaderCell key={item} align='center'>
                 <span className='text-xs'>{item}</span>
               </Table.ColumnHeaderCell>
@@ -72,6 +73,9 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
               {getFormattedCurrency(item.price as unknown as string)}
             </Table.Cell>
             <Table.Cell align='center'>{renderDescriptionField(item.description)}</Table.Cell>
+            <Table.Cell align='center' className='text-xs text-gray-500'>
+              {format(new Date(item.createdAt as unknown as string), 'MM/dd/yyyy HH:mm')}
+            </Table.Cell>
             <Table.Cell align='center'>
               {lotStatus !== 'terminated' && lotStatus !== 'finished' && (
                 <button className='group flex items-center' onClick={() => setBidId(item.id)}>
@@ -95,8 +99,8 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
     return (
       <HoverCard.Root>
         <HoverCard.Trigger>
-          <div className='w-[100px] overflow-hidden'>
-            <span className='text-ellipsis whitespace-nowrap text-xs text-gray-500'>{text}</span>
+          <div className='w-[100px] overflow-hidden text-ellipsis whitespace-nowrap text-gray-500'>
+            <span className='text-xs'>{text}</span>
           </div>
         </HoverCard.Trigger>
         <HoverCard.Content>
@@ -120,13 +124,14 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='fixed inset-0 bg-black/50'>
-          <Dialog.Content className='fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded bg-white p-8 text-gray-900 shadow'>
+          <Dialog.Content className='fixed left-1/2 top-1/2 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded bg-white p-8 text-gray-900 shadow'>
             <div className='flex items-center justify-between'>
               <Dialog.Title className='text-xl text-gray-800'>Offers list</Dialog.Title>
               <Dialog.Close className='text-gray-400 hover:text-gray-500'>
                 <Cross1Icon />
               </Dialog.Close>
             </div>
+
             <p className='my-4 text-xs text-gray-500'>List of offers from companies</p>
 
             <Table.Root variant='surface'>
