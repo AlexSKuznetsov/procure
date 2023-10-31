@@ -37,4 +37,4 @@ next-env.d.ts
 /temporal/lib
 
 # db
-/prisma/local.db
+/prisma/local*

@@ -16,9 +16,10 @@ type PropsType = {
   offers: OffersType[];
   lotStatus: string;
   lotId: string;
+  winnerOfferId: string | null;
 };
 
-export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
+export const BidsModal = ({ offers, lotStatus, lotId, winnerOfferId }: PropsType) => {
   const [open, setIsOpen] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [bidId, setBidId] = useState<string | null>(null);
@@ -87,6 +88,11 @@ export const BidsModal = ({ offers, lotStatus, lotId }: PropsType) => {
                     </Tooltip>
                   )}
                 </button>
+              )}
+              {lotStatus === 'finished' && item.id === winnerOfferId && (
+                <Tooltip content='Winner'>
+                  <CheckboxIcon className='text-green-600' />
+                </Tooltip>
               )}
             </Table.Cell>
           </Table.Row>

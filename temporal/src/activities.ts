@@ -9,8 +9,24 @@ export async function notify(
   // await axios.post('', lot); // like we sendind an email
   Context.current().log.info('Notify by email');
 
-  if (winner) {
+  if (winner && lot.lotId) {
+    const { lotId } = lot;
     const client = new PrismaClient();
+
+    try {
+      const currentLot = await client.lot.findFirst({ where: { lotId } });
+
+      await client.lot.update({
+        where: {
+          id: currentLot?.id,
+        },
+        data: {
+          winnerOfferId: winner,
+        },
+      });
+    } catch (e) {
+      console.error(e);
+    }
 
     try {
       const result = await client.offer.findUnique({

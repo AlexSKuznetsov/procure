@@ -26,6 +26,7 @@ export const Lot = ({
   createdAt,
   company,
   offers,
+  winnerOfferId,
 }: PropsType) => {
   const { companyId: sellerId } = useCompanyStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -87,7 +88,7 @@ export const Lot = ({
         </div>
       </CardFooter>
       {offers && offers.length > 0 && (
-        <BidsModal offers={offers} lotStatus={status} lotId={lotId} />
+        <BidsModal offers={offers} lotStatus={status} lotId={lotId} winnerOfferId={winnerOfferId} />
       )}
     </Card>
   );

@@ -11,41 +11,43 @@ datasource db {
 }
 
 model Lot {
-  id Int @id @default(autoincrement())
-  name String
+  id          Int    @id @default(autoincrement())
+  name        String
   description String
-  duration String
-  lotId String
-  status String 
+  duration    String
+  lotId       String
+  status      String
 
-  company Company @relation(fields: [companyId], references: [id])
+  company   Company @relation(fields: [companyId], references: [id])
   companyId String
 
   offers Offer[]
+
+  winnerOfferId String? @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Company {
-  id String @id @default(cuid())
+  id   String @id @default(cuid())
   name String
 
-  lots Lot[]
+  lots   Lot[]
   offers Offer[]
 }
 
 model Offer {
   id String @id @default(cuid())
 
-  company Company @relation(fields: [companyId], references: [id])
+  company   Company @relation(fields: [companyId], references: [id])
   companyId String
 
-  lot Lot @relation(fields: [lotNumber], references: [id])
+  lot       Lot @relation(fields: [lotNumber], references: [id])
   lotNumber Int
 
-  price Decimal
-  condition String
+  price       Decimal
+  condition   String
   description String
 
   createdAt DateTime @default(now())
