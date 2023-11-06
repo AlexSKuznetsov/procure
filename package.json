@@ -34,7 +34,7 @@
     "@temporalio/worker": "^1.8.1",
     "@temporalio/workflow": "^1.8.1",
     "@types/node": "20.8.10",
-    "@types/react": "18.2.35",
+    "@types/react": "18.2.36",
     "@types/react-dom": "18.2.14",
     "autoprefixer": "10.4.16",
     "axios": "^1.4.0",
