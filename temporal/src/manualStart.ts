@@ -6,11 +6,12 @@ import { faker } from '@faker-js/faker';
 
 // npx tsx ./temporal/src/manualStart.ts
 
-const startMultipleWorkflows = async (count: number) => {
+const startMultipleWorkflows = async (count: number, duration: string) => {
   const prismaClient = new PrismaClient();
   const connection = await Connection.connect({});
   const client = new Client({ connection });
   const company = await prismaClient.company.findFirst();
+  const taskQueue = 'start-procur';
 
   if (company) {
     Array(count)
@@ -24,12 +25,12 @@ const startMultipleWorkflows = async (count: number) => {
               {
                 name: faker.commerce.productName(),
                 description: faker.commerce.productDescription(),
-                duration: '60 sec',
+                duration,
                 lotId,
                 companyId: company.id,
               },
             ],
-            taskQueue: 'start-procur',
+            taskQueue,
           });
 
           console.log('workflow ' + i + ' started: ' + result.workflowId);
@@ -42,4 +43,4 @@ const startMultipleWorkflows = async (count: number) => {
   }
 };
 
-startMultipleWorkflows(10);
+startMultipleWorkflows(3, '10 days');

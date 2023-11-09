@@ -50,12 +50,12 @@ const LotFields = () => {
   return (
     <div className='mt-4 space-y-4'>
       <div>
-        <Label.Root className='whitespace-nowrap text-sm font-medium text-gray-800' htmlFor='name'>
+        <Label.Root className='whitespace-nowrap text-sm font-medium text-gray-100' htmlFor='name'>
           Name
         </Label.Root>
         <input
           autoFocus
-          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
+          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-100 shadow-sm'
           type='text'
           placeholder='Lot name'
           id='name'
@@ -65,13 +65,13 @@ const LotFields = () => {
 
       <div>
         <Label.Root
-          className='whitespace-nowrap text-sm font-medium text-gray-800'
+          className='whitespace-nowrap text-sm font-medium text-gray-100'
           htmlFor='description'
         >
           Description
         </Label.Root>
         <textarea
-          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
+          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-100 shadow-sm'
           placeholder='Lot description'
           id='description'
           name='description'
@@ -80,13 +80,13 @@ const LotFields = () => {
 
       <div>
         <Label.Root
-          className='col-span-1 whitespace-nowrap text-sm font-medium text-gray-800'
+          className='col-span-1 whitespace-nowrap text-sm font-medium text-gray-100'
           htmlFor='duration'
         >
           Duration
         </Label.Root>
         <input
-          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-900 shadow-sm'
+          className='w-full rounded border border-gray-300 px-2 py-1.5 text-sm text-gray-100 shadow-sm'
           type='text'
           placeholder='30 days; 1 day; 1 hour'
           id='duration'
