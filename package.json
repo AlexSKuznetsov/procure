@@ -27,7 +27,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.6",
     "@radix-ui/themes": "^2.0.0",
-    "@tanstack/react-query": "^4.32.0",
+    "@tanstack/react-query": "^5.0.0",
     "@temporalio/activity": "^1.8.1",
     "@temporalio/client": "^1.8.1",
     "@temporalio/common": "^1.8.1",
