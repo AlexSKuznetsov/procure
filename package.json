@@ -33,7 +33,7 @@
     "@temporalio/common": "^1.8.1",
     "@temporalio/worker": "^1.8.1",
     "@temporalio/workflow": "^1.8.1",
-    "@types/node": "20.11.17",
+    "@types/node": "20.11.19",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
     "autoprefixer": "10.4.17",
