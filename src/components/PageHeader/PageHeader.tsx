@@ -20,7 +20,7 @@ export const PageHeader = ({ headerText, lotsCount }: PropsType) => {
             <TextField.Slot>
               <MagnifyingGlassIcon height='16' width='16' />
             </TextField.Slot>
-            <TextField.Input placeholder='Search by lot name' radius='full' />
+            <TextField.Input placeholder='Search by lot name' radius='medium' />
           </TextField.Root>
         </div>
 

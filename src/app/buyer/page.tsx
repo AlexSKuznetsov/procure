@@ -5,7 +5,7 @@ import { PageHeader } from '@/components/PageHeader/PageHeader';
 import { useCompanyStore } from '@/store/store';
 import { useGetBuyerData } from './hooks';
 
-const Byuer = () => {
+const Buyer = () => {
   const { companyId } = useCompanyStore();
   const { lots } = useGetBuyerData(companyId);
 
@@ -22,4 +22,4 @@ const Byuer = () => {
   );
 };
 
-export default Byuer;
+export default Buyer;
